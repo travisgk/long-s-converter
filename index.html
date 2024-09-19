@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long S Converter</title>
+</head>
+<body>
+    <h1>Long S Converter</h1>
+    <p>This tool converts text to use the archaic long S letter ( ſ ) in its spellings.</p>
+
+    <p>English, Spanish, French, Italian, and German are supported.</p>
+
+    <br>
+    
+    <!-- Textarea to input the text -->
+    <textarea id="inputText" placeholder="Enter your text here." rows=7 cols=55></textarea>
+    
+    <!-- Dropdown to select uppercase or lowercase -->
+    <br><br>
+    <label for="langOption">Choose the language:</label>
+    <select id="langOption" required>
+        <option value="en" selected>English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="it">Italiano</option>
+        <option value="de">Deutsch</option>
+    </select>
+    
+    <!-- Button to trigger conversion -->
+    <br><br>
+    <button onclick="convertText()">Convert</button>
+    
+    <!-- Paragraph to display the output text -->
+    <p id="outputText"></p>
+    
+    <script src="script.js"></script>
+</body>
+</html>
