@@ -7,9 +7,14 @@
 </head>
 <body>
     <h1>Long S Converter</h1>
-    <p>This tool converts text to use the archaic long S letter ( ſ ) in its spellings.</p>
+    <!-- loads scripts traditionally, no modules required. -->
+    <script src="js-long-s/splitstring.js"></script>
+    <script src="js-long-s/romance.js"></script>
+    <script src="script.js"></script>
 
-    <p>English, Spanish, French, Italian, and German are supported.</p>
+    <p>This tool converts text to use the archaic long S letter (ſ) in its spellings.</p>
+
+    <p>English, Spanish, French, and Italian are supported.</p>
 
     <br>
     
@@ -24,7 +29,6 @@
         <option value="es">Español</option>
         <option value="fr">Français</option>
         <option value="it">Italiano</option>
-        <option value="de">Deutsch</option>
     </select>
     
     <!-- Button to trigger conversion -->
@@ -33,7 +37,5 @@
     
     <!-- Paragraph to display the output text -->
     <p id="outputText"></p>
-    
-    <script src="script.js"></script>
 </body>
 </html>
