@@ -1,5 +1,19 @@
+/*
+Filename: splitstring.js
+Description: This file contains a function that will take a sentence
+             and return a list of each contained individual word
+             along with its objective index in the sentence.
+             This goes beyond splitting, since this ensures
+             there's no surrounding punctuation in the result.
+
+Author: TravisGK
+Version: 1.0
+
+License: MIT License
+*/
+
 function isLetter(char) {
-    // returns true if the given character is a letter.
+    /** Returns true if the given character is a letter. */
     const category = char.codePointAt(0);
     return (category >= 0x0041 && category <= 0x005A) || // A-Z.
            (category >= 0x0061 && category <= 0x007A) || // a-z.
@@ -7,6 +21,20 @@ function isLetter(char) {
 }
 
 function splitStringWithIndices(inputString, lang) {
+    /**
+    This function takes the given text and splits it into a list of words,
+    with each word having its index in the original text provided.
+    the function also considers language-specific rules for word splitting.
+
+    Parameters:
+    text (string): the string to be split.
+    lang (string): the language code (to handle specific rules).
+
+    Returns:
+    list of tuples: each tuple contains the original text itself
+                    and the index where it starts in the source text.
+    */
+    
     const APOSTROPHES = "'";
     const results = [];
     const regex = /\S+/g; // matches non-whitespace sequences.
@@ -49,7 +77,7 @@ function splitStringWithIndices(inputString, lang) {
 
         index += localStartIndex;
         word = word.substring(localStartIndex, localEndIndex + 1);
-        results.push([index, word]);
+        results.push([word, index]);
     }
 
     return results;

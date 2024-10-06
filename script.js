@@ -1,55 +1,75 @@
+/**
+Filename: script.js
+Description: js-long-s is a tool that takes modern text and 
+             inserts the archaic letter of the long S (ſ) where it fits.
+
+Author: TravisGK
+Version: 1.0
+
+License: MIT License
+*/
+
+
+function getConversionFunc(lang) {
+    /** Returns the conversion function used for a particular language. */
+    switch (lang) {
+        case "en":
+            return convertEnglishWord;
+        case "fr":
+            return convertFrenchWord;
+        case "de":
+            return convertGermanWord;
+        case "es":
+            return convertSpanishWord;
+        case "it":
+            return convertItalianWord;
+        default:
+            return null;
+    }
+}
+
 function convertText() {
-    const keepUnknownS = false;
+    /**
+    Places the long s (ſ) in a sentence and returns it.
+     
+    Parameters:
+    text (string): the string to convert into archaic spelling.
+    lang (string): the language code for <text>. "en", "es", "fr", "it", or "de".
+    keepUnknownS (boolean): if true, ambiguous cases of S will be shown as X.
+     
+    Returns:
+    string: text with the long s (ſ) placed.
+    */
 
-    const inputText = document.getElementById("inputText").value;
+    let text = document.getElementById("inputText").value;
     const langOption = document.getElementById("langOption").value;
-    
-    let outputText = inputText;
-    let convertFunc = null;
+    let keepUnknownS = false;
 
-    if (langOption === "en") {
-        convertFunc = englishConversion;
-    } else if (langOption === "es") {
-        convertFunc = spanishConversion;
-        //const result = spanishConversion(inputText);
-        //outputText = result[0]; // modified text.
-    } else if (langOption === "fr") {
-        convertFunc = frenchConversion;
-        // const result = frenchConversion(inputText);
-        // outputText = result[0]; // modified text.
-    } else if (langOption === "it") {
-        convertFunc = italianConversion;
-        // const result = italianConversion(inputText);
-        // outputText = result[0]; // modified text.
-    } else {
-        outputText = "DE";
+    const convertFunc = getConversionFunc(langOption);
+
+    if (convertFunc === null) {
+        console.log(`language "${lang}" not found. The options are: en, es, fr, it, de.`);
+        return text;
     }
 
-    if (convertFunc !== null) {
-        let results = splitStringWithIndices(inputText, langOption);
-        for (let [i, oldWord] of results) {
-            let [newWord, replacementMade, useFancyReplace] = convertFunc(oldWord);
+    const wordsWithIndices = splitStringWithIndices(text, langOption);
 
-            if (!replacementMade) {
-                continue;
-            }
+    // converts each word individually.
+    for (const [oldWord, startIndex] of wordsWithIndices) {
+        const newWord = convertFunc(oldWord);
 
-            if (!useFancyReplace) {
-                outputText = outputText.substring(0, i) + newWord + outputText.substring(i + newWord.length);
-            } else {
-                if (!keepUnknownS) {
-                    newWord = newWord.replace(/X/g, "ſ"); // replaces UNKNOWN_S with long s
-                }
+        if (oldWord === newWord) {
+            continue;  // no replacements were made.
+        }
 
-                for (let j = 0; j < newWord.length; j++) {
-                    if (outputText[i + j] === "s") {
-                        outputText = outputText.substring(0, i + j) + newWord[j] + outputText.substring(i + j + 1);
-                    }
-                }
+        // overwrites the original occurrences of S.
+        for (let j = 0; j < newWord.length; j++) {
+            const clip = startIndex + j;
+            if (text[clip] === "s") {
+                text = text.slice(0, clip) + newWord[j] + text.slice(clip + 1);
             }
         }
     }
-
-
-    document.getElementById("outputText").innerText = outputText;
+    
+    document.getElementById("outputText").innerText = text;
 }

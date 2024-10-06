@@ -1,0 +1,112 @@
+body, h1, p {
+    margin: 1em;
+    padding: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-size: 3em;
+    margin: 2em; /* Centered with top and bottom margin */
+}
+
+.credit {
+    font-size: 1em;
+    margin: 2em; /* Centered with top and bottom margin */
+}
+
+.container {
+    max-width: 60em; /* Maximum width of the container */
+    margin: 2em; /* Centered with top and bottom margin */
+    padding: 1em 1em 1em 1em; /* Padding inside the container */
+    background-color: #fff; /* White background for the container */
+    border-radius: 1em; /* Rounded corners */
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Style the heading */
+h1 {
+    color: #333; /* Dark gray color */
+    margin-bottom: 1em; /* Space below the heading */
+}
+
+/* Style the paragraph */
+p {
+    color: #666; /* Medium gray color */
+    line-height: 1.5; /* Increase line height for readability */
+    margin-bottom: 1em; /* Space below the paragraph */
+}
+
+.ui-container {
+    display: flex;         /* Flexbox layout */
+    flex-direction: row;    /* By default, items will be in a row */
+    justify-content: space-between; /* Spread the input and output boxes */
+    align-items: start;    /* Align them vertically in the center */
+    gap: 10px;              /* Space between the input and output */
+    padding: 0;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center; /* Vertically centers the items */
+    justify-content: space-between; /* Ensures the button is pushed to the right */
+    gap: 0.5em; /* Adds space between the elements */
+}
+
+#langOption {
+    /*flex: 1;  Allows the select box to take as much space as needed */
+    margin-left: 0;
+    margin-right: auto;
+    max-width: 10em; /* Sets a maximum width */
+    width: 100%; /* Ensures the select box stays responsive */
+    flex-grow: 0; /* Prevents the select box from growing beyond the max-width */
+}
+
+/* Input box styling */
+#inputText {
+  flex: 1;                /* Input box takes up available space */
+  padding: 0.2em;
+  font-size: 1.5em;
+  min-height: 5em;
+  margin: 0;
+}
+
+/* Output box styling */
+#outputText {
+  flex: 1;                /* Output box takes up the same space */
+  padding: 0.2em;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 1.5em;
+  min-height: 5em;       /* Ensure output box has some height */
+  margin: 0;
+}
+
+
+.my-button {
+    padding: 0.9em 0.8em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.my-button:hover {
+    background-color: #0056b3;
+}
+
+/* Media query to stack elements on smaller screens */
+@media (max-width: 30em) {
+  .ui-container {
+    flex-direction: column; /* Stack input and output vertically */
+  }
+
+  #inputBox, #outputBox {
+    width: auto;           /* Full width when stacked */
+  }
+}
