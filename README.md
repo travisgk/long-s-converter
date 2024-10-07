@@ -1,11 +1,11 @@
 # long-s-converter
 ### [Click here to use the converter.](https://travisgk.github.io/long-s-converter/)
-This is a JavaScript tool that converts given text to use the archaic letter known as the long S ( ſ ) in its output. It's a JavaScript version of my original Python code found at [long-s](https://github.com/travisgk/py-long-s).
+This is a JavaScript tool that converts text to use the archaic long S letter ( ſ ) in its spellings.
+<br>
+English, French, German, Spanish, and Italian are supported.
+
+It's a JavaScript version of my original Python code found at [py-long-s](https://github.com/travisgk/py-long-s).
 <br>
 <br>
-## Languages Supported
-- English
-- French
-- German
-- Spanish
-- Italian
+## Special Thanks
+Thank you Andrew West of the TeX Users Group for the documentation found under [The Rules for Long S](https://www.tug.org/TUGboat/tb32-1/tb100west.pdf), which was fundamental in writing the conversion functions for English, French, Spanish, and Italian. 
