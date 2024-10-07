@@ -1,5 +1,31 @@
+@font-face {
+    font-family: "Yonkers"; /*a name to be used later*/
+    src: local("yonkers.ttf"); /*URL to font*/
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.1s ease;
+}
+
+a:link {
+    color: #007bff;
+}
+
+a:visited {
+    color: #007bff;
+}
+
+a:hover {
+    color: #003bcf;
+}
+
+a:active {
+    color: orange;
+}
+
 body, h1, p {
-    margin: 1em;
+    margin: 1rem;
     padding: 0;
 }
 
@@ -8,100 +34,177 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.title {
-    font-size: 3em;
-    margin: 2em; /* Centered with top and bottom margin */
+select {
+    font-size: 1.1rem;
 }
 
-.credit {
-    font-size: 1em;
-    margin: 2em; /* Centered with top and bottom margin */
-}
-
-.container {
-    max-width: 60em; /* Maximum width of the container */
-    margin: 2em; /* Centered with top and bottom margin */
-    padding: 1em 1em 1em 1em; /* Padding inside the container */
-    background-color: #fff; /* White background for the container */
-    border-radius: 1em; /* Rounded corners */
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-}
-
-/* Style the heading */
-h1 {
-    color: #333; /* Dark gray color */
-    margin-bottom: 1em; /* Space below the heading */
-}
-
-/* Style the paragraph */
 p {
     color: #666; /* Medium gray color */
     line-height: 1.5; /* Increase line height for readability */
-    margin-bottom: 1em; /* Space below the paragraph */
+    margin-bottom: 1rem; /* Space below the paragraph */
 }
 
-.ui-container {
-    display: flex;         /* Flexbox layout */
-    flex-direction: row;    /* By default, items will be in a row */
-    justify-content: space-between; /* Spread the input and output boxes */
-    align-items: start;    /* Align them vertically in the center */
-    gap: 10px;              /* Space between the input and output */
-    padding: 0;
+/*#outputTextbox {
+    padding: 1rem;
+}*/
+
+.title {
+    font-size: 2rem;
+    display: inline;
+    color: #333; /* Dark gray color */
+    margin-bottom: 1rem; /* Space below the heading */
 }
+
+.credit {
+    font-size: 1rem;
+    display: inline;
+    color: #007bff;
+}
+
+.bubble-container {
+    margin: 1.3rem;
+    padding: 1rem 1rem 1rem 1rem; /* Padding inside the container */
+    background-color: #fff; /* White background for the container */
+    border-radius: 1rem; /* Rounded corners */
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15); /* Soft shadow effect */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Style the paragraph */
+
+
+textarea {
+    font-family: Arial;
+    width: auto;
+    resize: vertical;
+    margin: 0;
+    padding: 0.2rem;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fffff;
+    font-size: 1.3rem;
+}
+
 
 .flex-container {
     display: flex;
     align-items: center; /* Vertically centers the items */
     justify-content: space-between; /* Ensures the button is pushed to the right */
-    gap: 0.5em; /* Adds space between the elements */
+    gap: 0.5rem; /* Adds space between the elements */
+    margin-bottom: 1rem;
 }
+
 
 #langOption {
     /*flex: 1;  Allows the select box to take as much space as needed */
     margin-left: 0;
     margin-right: auto;
-    max-width: 10em; /* Sets a maximum width */
+    max-width: 6rem; /* Sets a maximum width */
     width: 100%; /* Ensures the select box stays responsive */
     flex-grow: 0; /* Prevents the select box from growing beyond the max-width */
 }
 
-/* Input box styling */
-#inputText {
-  flex: 1;                /* Input box takes up available space */
-  padding: 0.2em;
-  font-size: 1.5em;
-  min-height: 5em;
-  margin: 0;
+
+#copy-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1.5rem;
+    padding: 0.2rem 0.3rem;
+    background: rgba(60,60,60,0.35);
+    
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* Output box styling */
-#outputText {
-  flex: 1;                /* Output box takes up the same space */
-  padding: 0.2em;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  font-size: 1.5em;
-  min-height: 5em;       /* Ensure output box has some height */
-  margin: 0;
+#copy-button:hover {
+    background: rgba(60,60,60,0.6);
 }
 
 
-.my-button {
-    padding: 0.9em 0.8em;
+#notification {
+    display: none; /* Hide by default */
+    background-color: rgba(0, 128, 255, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    opacity: 1; /* Fully visible */
+    transition: opacity 1s ease; /* Fade transition */
+}
+
+
+#convert-button {
+    font-size: 1rem;
+    padding: 0.9rem 1.8rem;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 0.5em;
+    border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.my-button:hover {
+#convert-button:hover {
     background-color: #0056b3;
 }
 
+
+.ui-container {
+    display: inline-flex;         /* Flexbox layout */
+    flex-direction: row;    /* By default, items will be in a row */
+    justify-content: space-between; /* Spread the input and output boxes */
+    align-items: start;    /* Align them vertically in the center */
+    gap: 1rem;              /* Space between the input and output */
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* Input box styling */
+#inputText {
+    width: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 1rem;
+    min-height: 10rem;
+}
+
+
+#outputTextbox {
+    line-break: auto;
+}
+
+
+/* Output box styling */
+#outputText {
+    font-family: "Yonkers";
+    width: 100%;
+    min-height: 10rem;
+    font-size: 1.58rem;
+    flex: 1;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    border: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    line-break: auto;
+}
+
+
 /* Media query to stack elements on smaller screens */
-@media (max-width: 30em) {
+@media (max-width: 45rem) {
   .ui-container {
     flex-direction: column; /* Stack input and output vertically */
   }

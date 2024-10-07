@@ -12,7 +12,7 @@ Version: 1.0
 License: MIT License
 */
 
-function isLetter(char) {
+function _isLetter(char) {
     /** Returns true if the given character is a letter. */
     const category = char.codePointAt(0);
     return (category >= 0x0041 && category <= 0x005A) || // A-Z.
@@ -20,7 +20,8 @@ function isLetter(char) {
            (category >= 0x00C0 && category <= 0x00FF); // accented letters (Lat-1).
 }
 
-function splitStringWithIndices(inputString, lang) {
+
+function _splitStringWithIndices(inputString, lang) {
     /**
     This function takes the given text and splits it into a list of words,
     with each word having its index in the original text provided.
@@ -48,7 +49,7 @@ function splitStringWithIndices(inputString, lang) {
         // finds the first letter of the word.
         let localStartIndex = 0;
         for (let i = 0; i < word.length; i++) {
-            if (isLetter(word[i])) {
+            if (_isLetter(word[i])) {
                 localStartIndex = i;
                 break;
             }
@@ -60,7 +61,7 @@ function splitStringWithIndices(inputString, lang) {
         if (lang === "de") {
             // if German, it considers apostrophes for ending index.
             for (let i = word.length - 1; i >= 0; i--) {
-                if (isLetter(word[i]) || word[i] === APOSTROPHES) {
+                if (_isLetter(word[i]) || word[i] === APOSTROPHES) {
                     localEndIndex = i;
                     break;
                 }
@@ -68,7 +69,7 @@ function splitStringWithIndices(inputString, lang) {
         } else {
             // for other languages, it only considers letters for ending index.
             for (let i = word.length - 1; i >= 0; i--) {
-                if (isLetter(word[i])) {
+                if (_isLetter(word[i])) {
                     localEndIndex = i;
                     break;
                 }

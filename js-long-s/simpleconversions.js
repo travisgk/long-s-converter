@@ -8,18 +8,25 @@ Version: 1.0
 License: MIT License
 */
 
-function stripAccents(word) {
-    /** Returns the given text with any accent marks removed. */
-    const PLACEHOLDER = "\t";
-    word = word.replace(/ß/g, PLACEHOLDER);
-    const cleanWord = unidecode(word);
-    return cleanWord.replace(new RegExp(PLACEHOLDER, 'g'), "ß");
+function _stripAccents(str) {
+    /** Returns the given text with any accents removed. */
+    const accents = {
+        'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a',
+        'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+        'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+        'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ø': 'o',
+        'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
+        'ç': 'c',
+        'ñ': 'n'
+    };
+    return str.split('').map(char => accents[char] || char).join('');
 }
 
-function stripConsonantAccents(word) {
+
+function _stripConsonantAccents(word) {
     /** Returns text with any accent marks over only consonants removed. */
     let result = "";
-    const noAccents = stripAccents(word);
+    const noAccents = _stripAccents(word);
     for (let i = 0; i < noAccents.length; i++) {
         const nChar = noAccents[i];
         if ("AEIOUYaeiouy".includes(nChar)) {
@@ -31,7 +38,8 @@ function stripConsonantAccents(word) {
     return result;
 }
 
-function applyLongSPattern(word, pattern) {
+
+function _applyLongSPattern(word, pattern) {
     /**
     Returns the result of using the given regex pattern
     to select occurrences of the letter S and replace them with a long S.
@@ -51,7 +59,8 @@ function applyLongSPattern(word, pattern) {
     return word;
 }
 
-function transferLongS(processedWord, originalWord) {
+
+function _transferLongS(processedWord, originalWord) {
     /**
     This function is given the processed word with any long S (ſ),
     which will generally lack accents and capitalization,
@@ -73,9 +82,10 @@ function transferLongS(processedWord, originalWord) {
     return originalWord;
 }
 
+
 function convertEnglishWord(word) {
     /** Returns English text with the long S (ſ) placed appropriately. */
-    const noAccents = stripAccents(word.toLowerCase());
+    const noAccents = _stripAccents(word.toLowerCase());
 
     // looks for any "S" that's followed by a line break (but not a hyphen)
     // or a letter other than F, B (old books only), K (old books only),
@@ -89,68 +99,59 @@ function convertEnglishWord(word) {
         pattern = /(?<!f)s(?=[a-eg-z—])/;
     }
 
-    const modifiedWord = applyLongSPattern(noAccents, pattern);
+    const modifiedWord = _applyLongSPattern(noAccents, pattern);
     if (modifiedWord === null) {
         return word;  // there are no replacements to be made.
     }
 
     const finalWord = modifiedWord.replace(/ſſſ/g, "ſsſ");
-    return transferLongS(finalWord, word);
+    return _transferLongS(finalWord, word);
 }
+
 
 function convertFrenchWord(word) {
     /** Returns French text with the long S (ſ) placed appropriately. */
-    const noAccents = stripAccents(word.toLowerCase());
+    const noAccents = _stripAccents(word.toLowerCase());
 
     // looks for any "S" that's followed by a letter other than B, F, or H.
-    const modifiedWord = applyLongSPattern(noAccents, /s(?=[ac-egi-z])/);
+    const modifiedWord = _applyLongSPattern(noAccents, /s(?=[ac-egi-z])/);
     if (modifiedWord === null) {
         return word;  // there are no replacements to be made.
     }
-    return transferLongS(modifiedWord, word);
+    return _transferLongS(modifiedWord, word);
 }
+
 
 function convertSpanishWord(word) {
     /** Returns Spanish text with the long S (ſ) placed appropriately. */
-    const cleanWord = stripConsonantAccents(word.toLowerCase());
+    const cleanWord = _stripConsonantAccents(word.toLowerCase());
 
     // looks for any "S" that's followed by a letter other than B, F, H,
     // or an accented vowel. it can also be followed by a hyphen or line-break.
-    const modifiedWord = applyLongSPattern(cleanWord, /s(?=[ac-egi-z-—])/);
+    const modifiedWord = _applyLongSPattern(cleanWord, /s(?=[ac-egi-z-—])/);
     if (modifiedWord === null) {
         return word;  // there are no replacements to be made.
     }
 
     const finalWord = modifiedWord.replace(/ſſi/g, "ſsi");
-    return transferLongS(finalWord, word);
+    return _transferLongS(finalWord, word);
 }
+
 
 function convertItalianWord(word) {
     /** Returns Italian text with the long S (ſ) placed appropriately. */
     const MAINTAIN_DOUBLE_LONG_WITH_SSI = true;  // historical variation.
-    const cleanWord = stripConsonantAccents(word.toLowerCase());
+    const cleanWord = _stripConsonantAccents(word.toLowerCase());
 
     // looks for any "S" that's followed by a letter other than B, F,
     // or an accented vowel.
-    const modifiedWord = applyLongSPattern(cleanWord, /s(?=[ac-eg-z-—])/);
+    const modifiedWord = _applyLongSPattern(cleanWord, /s(?=[ac-eg-z-—])/);
     if (modifiedWord === null) {
         return word;  // there are no replacements to be made.
     }
 
     const finalWord = MAINTAIN_DOUBLE_LONG_WITH_SSI ? modifiedWord : modifiedWord.replace(/ſſi/g, "ſsi");
-    return transferLongS(finalWord, word);
+    return _transferLongS(finalWord, word);
 }
 
-// Utility function to remove accents (as there is no direct equivalent of 'unidecode' in JS)
-function unidecode(str) {
-    const accents = {
-        'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a',
-        'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-        'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
-        'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ø': 'o',
-        'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
-        'ç': 'c',
-        'ñ': 'n'
-    };
-    return str.split('').map(char => accents[char] || char).join('');
-}
+

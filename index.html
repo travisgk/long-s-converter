@@ -7,22 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 style="display: inline;">Long S Converter</h1> <h3 style="color:#007bff; display: inline;">by TravisGK</h3>
+    <h1 class="title">Long S Converter</h1> <h3 class="credit">by <a href="https://github.com/travisgk">TravisGK</a></h3>
     
     <!-- loads scripts traditionally, no modules required. -->
+    <script src="js-long-s/germanlists.js"></script>
     <script src="js-long-s/splitstring.js"></script>
     <script src="js-long-s/simpleconversions.js"></script>
-    <script src="script.js"></script>
+    <script src="js-long-s/germanconversion.js"></script>
+    <script src="js-long-s/long-s.js"></script>
 
-    <div class="container">
-        <div class="ui-container">
-            <textarea id="inputText" placeholder="Enter your text here." rows=7 cols=55></textarea>
-            <p id="outputText"></p>
-        </div>
-
-        <br>
+    <div class="bubble-container">
         <div class="flex-container">
-            <label for="langOption">Choose the language:</label>
+            <label for="langOption">Language:</label>
             <select id="langOption"  required>
                 <option value="en" selected>English</option>
                 <option value="fr">Français</option>
@@ -31,21 +27,91 @@
                 <option value="it">Italiano</option>
             </select>
 
-            <button class="my-button" onclick="convertText()">Convert</button>
+            <button id="convert-button" onclick="runConversion()">Convert</button>
+            <script type="text/javascript">
+                function runConversion() {
+                    let text = document.getElementById("inputText").value;
+                    const langOption = document.getElementById("langOption").value;
+                    let keepUnknownS = false;
+
+                    document.getElementById("outputTextbox").innerText = convertText(
+                        text, langOption, keepUnknownS
+                    );
+                }
+
+                // Attach the copyToClipboard function to the button's click event
+                document.getElementById("convert-button").addEventListener("click", runConversion);
+
+            </script>
+        </div>
+        
+        <div class="ui-container">
+            <textarea id="inputText" placeholder="Enter your text here." cols=105></textarea>
+            <div id="outputText">
+                <div id="outputTextbox"></div>
+                <div style="text-align: right;">
+                    <button id="copy-button">
+                        <span style="font-size: .875em; margin-right: .125em; position: relative; top: -.25em; left: -.125em">
+  📄<span style="position: absolute; top: .25em; left: .25em">📄</span>
+</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="position: relative;">
+            <div id="notification">Copied to clipboard!</div>
         </div>
 
-        <br><br>
-        
+        <br>
+        <br>
     </div>
 
-    <div class="container">
+    <script type="text/javascript">
+        let notificationTimeout; // stores timeout ID.
+
+        // Function to show the notification
+        function showNotification() {
+            const notification = document.getElementById("notification");
+
+            // Clear any existing timeout to avoid conflicts
+            clearTimeout(notificationTimeout);
+            
+            // Reset styles to prepare for showing the notification
+            notification.style.display = "block"; // Show the notification
+            notification.style.opacity = "1"; // Reset opacity for new notification
+
+            // Fade out the notification after 5 seconds
+            notificationTimeout = setTimeout(() => {
+                notification.style.opacity = "0"; // Start fading
+            }, 2000); // Wait for 5 seconds before starting to fade
+
+            // Remove the notification from the DOM after fading out
+            notificationTimeout = setTimeout(() => {
+                notification.style.display = "none"; // Hide the notification completely
+                notification.style.opacity = "1"; // Reset opacity for future uses
+            }, 3000); // Total time until it's completely hidden
+        }
+
+        // Function to copy text to clipboard
+        function copyToClipboard() {
+            const outputText = document.getElementById("outputTextbox").innerText; // Get the text from the div
+            navigator.clipboard.writeText(outputText) // Copy the text to clipboard
+                .then(() => {
+                    console.log("Text copied to clipboard!");
+                    showNotification();
+                })
+                .catch(err => {
+                    console.error("Error copying text: ", err);
+                });
+        }
+
+        // Attach the copyToClipboard function to the button's click event
+        document.getElementById("copy-button").addEventListener("click", copyToClipboard);
+    </script>
+
+    <div class="bubble-container">
         <p>This tool automatically inserts the historical long&nbsp;S character&nbsp;(&nbsp;ſ&nbsp;) into text based on language-specific spelling conventions. The long&nbsp;S was commonly used in various European languages from the Medieval to the early Modern period, giving texts an antiquated, old-style appearance.</p>
         <p style="margin-top: 1em;">English, French, German, Spanish, and Italian are supported.</p>
     </div>
-    
-    
-
-
-
 </body>
 </html>
