@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Yonkers"; /*a name to be used later*/
-    src: local("yonkers.ttf"); /*URL to font*/
+    src: url("https://github.com/travisgk/long-s-converter/blob/main/yonkers.ttf"); /*URL to font*/
 }
 
 a {
