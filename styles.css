@@ -44,14 +44,15 @@ p {
     margin-bottom: 1rem; /* Space below the paragraph */
 }
 
-/*#outputTextbox {
-    padding: 1rem;
-}*/
+.header-container {
+    margin: 1rem;
+}
 
 .title {
     font-size: 2rem;
     display: inline;
     color: #333; /* Dark gray color */
+    margin: 0;
     margin-bottom: 1rem; /* Space below the heading */
 }
 
@@ -59,6 +60,7 @@ p {
     font-size: 1rem;
     display: inline;
     color: #007bff;
+    margin: 0;
 }
 
 .bubble-container {
@@ -70,9 +72,6 @@ p {
     overflow-x: hidden;
     overflow-y: auto;
 }
-
-/* Style the paragraph */
-
 
 textarea {
     font-family: Arial;
@@ -87,7 +86,6 @@ textarea {
     font-size: 1.3rem;
 }
 
-
 .flex-container {
     display: flex;
     align-items: center; /* Vertically centers the items */
@@ -95,7 +93,6 @@ textarea {
     gap: 0.5rem; /* Adds space between the elements */
     margin-bottom: 1rem;
 }
-
 
 #langOption {
     /*flex: 1;  Allows the select box to take as much space as needed */
@@ -106,7 +103,6 @@ textarea {
     flex-grow: 0; /* Prevents the select box from growing beyond the max-width */
 }
 
-
 #copy-button {
     position: absolute;
     right: 0;
@@ -114,7 +110,6 @@ textarea {
     font-size: 1.5rem;
     padding: 0.2rem 0.3rem;
     background: rgba(60,60,60,0.35);
-    
     color: #fff;
     border: none;
     border-radius: 0.5rem;
@@ -125,7 +120,6 @@ textarea {
 #copy-button:hover {
     background: rgba(60,60,60,0.6);
 }
-
 
 #notification {
     display: none; /* Hide by default */
@@ -139,7 +133,6 @@ textarea {
     opacity: 1; /* Fully visible */
     transition: opacity 1s ease; /* Fade transition */
 }
-
 
 #convert-button {
     font-size: 1rem;
@@ -156,7 +149,6 @@ textarea {
     background-color: #0056b3;
 }
 
-
 .ui-container {
     width: 100%;
     display: inline-flex;         /* Flexbox layout */
@@ -169,7 +161,6 @@ textarea {
     overflow-y: auto;
 }
 
-
 /* Input box styling */
 #inputText {
     width: 100%;
@@ -179,11 +170,9 @@ textarea {
     min-height: 10rem;
 }
 
-
 #outputTextbox {
     line-break: auto;
 }
-
 
 /* Output box styling */
 #outputText {
@@ -202,7 +191,6 @@ textarea {
     position: relative;
     line-break: auto;
 }
-
 
 /* Media query to stack elements on smaller screens */
 @media (max-width: 45rem) {
