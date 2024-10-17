@@ -1110,7 +1110,7 @@ const END_PATTERNS = {
 
 
 // Step 3.
-OMNIPRESENT_PATTERNS = [
+const OMNIPRESENT_PATTERNS = [
     "intrauterinpeſſar",
     "dreiflüſseſtädte",
     "bertoldsbrunnen",
