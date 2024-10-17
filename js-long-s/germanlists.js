@@ -163,6 +163,7 @@ const EXACT_MATCHES = {
         "meiſten",
         "meiſter",
         "meiſtes",
+        "mitſamt",
         "müſſten",
         "meiſte",
         "menſch",
@@ -229,7 +230,7 @@ const EXACT_MATCHES = {
         "unſres",
         "unſer",
         "unſre",
-        "uſw",  // usw. (und so weiter)
+        "uſw", // usw. (und so weiter)
     ],
     "v": [
         "verlaſſen",
@@ -1109,7 +1110,7 @@ const END_PATTERNS = {
 
 
 // Step 3.
-const OMNIPRESENT_PATTERNS = [
+OMNIPRESENT_PATTERNS = [
     "intrauterinpeſſar",
     "dreiflüſseſtädte",
     "bertoldsbrunnen",
@@ -1150,6 +1151,7 @@ const OMNIPRESENT_PATTERNS = [
     "rechtſtrebe",
     "rechtſturtz",
     "renaiſſance",
+    "sausſchluſs",
     "setymologie",
     "skongreſſes",
     "stransports",
@@ -1172,7 +1174,6 @@ const OMNIPRESENT_PATTERNS = [
     "rechtſtell",
     "rechtſtutz",
     "sausarbeit",
-    "sausſchluſs",
     "saustauſch",
     "ſchiffstau",
     "sintereſſe",
@@ -1223,12 +1224,14 @@ const OMNIPRESENT_PATTERNS = [
     "sausgangs",
     "saustrieb",
     "saustritt",
+    "serhöhung",
     "skongreſs",
     "spartnerſ",
     "stranſpir",
     "sſchoſſen",
     "sſchoſſes",
     "sſediment",
+    "szentrums",
     "transport",
     "verskunſt",
     "wachstums",
@@ -1240,6 +1243,8 @@ const OMNIPRESENT_PATTERNS = [
     "ſchoſſeſt",
     "ſorgfalts",
     "adreſſat",
+    "auftrags",
+    "ausgangs",
     "austrieb",
     "austritt",
     "baſeball",
@@ -1272,6 +1277,7 @@ const OMNIPRESENT_PATTERNS = [
     "rechtſam",
     "ruſſiſch",
     "sarbeits",
+    "sauftrag",
     "saustrag",
     "sethiſch",
     "somelett",
@@ -1283,6 +1289,8 @@ const OMNIPRESENT_PATTERNS = [
     "sſchluſs",
     "sſsphäre",
     "sſyſtemſ",
+    "szentrum",
+    "szentren",
     "townsend",
     "tranſpir",
     "trauſaal",
@@ -1293,6 +1301,7 @@ const OMNIPRESENT_PATTERNS = [
     "ſchoſſes",
     "ſediment",
     "ſorgfalt",
+    "zentrums",
     "abſchor",
     "adreſſi",
     "arbeits",
@@ -1318,6 +1327,7 @@ const OMNIPRESENT_PATTERNS = [
     "floskel",
     "fluſſen",
     "förmigſ",
+    "gehalts",
     "genauſo",
     "gleichs",
     "gloſſar",
@@ -1428,6 +1438,7 @@ const OMNIPRESENT_PATTERNS = [
     "sſpiel",
     "sſtaat",
     "sſtoff",
+    "szahlſ",
     "szeitſ",
     "transp",
     "uſſeſt",
@@ -1544,6 +1555,7 @@ const OMNIPRESENT_PATTERNS = [
     "stags",
     "stäte",
     "syoga",
+    "szahl",
     "sſamm",
     "sſatz",
     "sſcha",
@@ -2883,7 +2895,6 @@ const POSTPROCESS_PATTERNS = [
 
 // Step 6.
 const FORCED_OVERWRITES = [
-    //
     // sb
     "gasbeſt",
     "asbeſtſ",
