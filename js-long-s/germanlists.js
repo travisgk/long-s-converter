@@ -561,6 +561,95 @@ const LONG_S_NAMES = {
     ],
 }
 
+// a few exceptional spellings.
+const FORCED_OVERWRITES = [
+    // geographic locations
+    "miſſouri",
+    "miſſiſſippi",
+    "auſtin",
+    //
+    // sb
+    "gaſbeſt",
+    "aſbeſtſ",
+    "aſbeſt",
+    //
+    // sh
+    "daſhboard",
+    "faſhionſ",
+    "faſhion",
+    "ſhampoo",
+    "finiſh",
+    "flaſhſ",
+    "sſhowſ",
+    "craſh",
+    "flaſh",
+    "sſhow",
+    "ſhoot",
+    "ſhowſ",
+    "ſlaſh",
+    "ſmaſh",
+    "caſh",
+    "haſh",
+    "moſh",
+    "puſh",
+    "waſh",
+    "ſhow",
+    //
+    // sk
+    "freizeitſkipper",
+    "ſkateboard",
+    "epiſkopat",
+    "ſkalpell",
+    "sſkandal",
+    "sſkelett",
+    "ſkribier",
+    "ſkulptur",
+    "ſkandal",
+    "ſkelett",
+    "ſkeptik",
+    "obſkur",
+    "sſkizz",
+    "sſklav",
+    "sſkript",
+    "ſkript",
+    "ſketch",
+    "ſkizz",
+    "ſklav",
+    "ſkyp",
+    "ſkop",
+    //
+    // sl
+    "ſlawiſch",
+    "ſlawien",
+    "moſlem",
+    "muſlim",
+    "siſlam",
+    "ſlogan",
+    "iſlam",
+    "ſlip",
+    //
+    // sm
+    "ſommerſmog",
+    "ſmalltalk",
+    "ſmoothie",
+    "ſmile",
+    "ſmoke",
+    //
+    // sn
+    "kulturſnob",
+    "filmſnob",
+    "verſnopt",
+    "groſny",
+    //
+    // sp
+    "aſphaltſ",
+    "aſphalt",
+    //
+    // sr
+    "siſrael",
+    "iſrael",
+]
+  
 /**
 Step 2 has no resource lists.
 */
@@ -1420,101 +1509,7 @@ const END_PATTERNS = {
 }
 
 /**
-Step 4) 
----
-This step enforces a few exceptional spellings.
-
-*/
-const FORCED_OVERWRITES = [
-    // geographic locations
-    "miſſouri",
-    "miſſiſſippi",
-    "auſtin",
-    //
-    // sb
-    "gaſbeſt",
-    "aſbeſtſ",
-    "aſbeſt",
-    //
-    // sh
-    "daſhboard",
-    "faſhionſ",
-    "faſhion",
-    "ſhampoo",
-    "finiſh",
-    "flaſhſ",
-    "sſhowſ",
-    "craſh",
-    "flaſh",
-    "sſhow",
-    "ſhoot",
-    "ſhowſ",
-    "ſlaſh",
-    "ſmaſh",
-    "caſh",
-    "haſh",
-    "moſh",
-    "puſh",
-    "waſh",
-    "ſhow",
-    //
-    // sk
-    "freizeitſkipper",
-    "ſkateboard",
-    "epiſkopat",
-    "ſkalpell",
-    "sſkandal",
-    "sſkelett",
-    "ſkribier",
-    "ſkulptur",
-    "ſkandal",
-    "ſkelett",
-    "ſkeptik",
-    "obſkur",
-    "sſkizz",
-    "sſklav",
-    "sſkript",
-    "ſkript",
-    "ſketch",
-    "ſkizz",
-    "ſklav",
-    "ſkyp",
-    "ſkop",
-    //
-    // sl
-    "ſlawiſch",
-    "ſlawien",
-    "moſlem",
-    "muſlim",
-    "siſlam",
-    "ſlogan",
-    "iſlam",
-    "ſlip",
-    //
-    // sm
-    "ſommerſmog",
-    "ſmalltalk",
-    "ſmoothie",
-    "ſmile",
-    "ſmoke",
-    //
-    // sn
-    "kulturſnob",
-    "filmſnob",
-    "verſnopt",
-    "groſny",
-    //
-    // sp
-    "aſphaltſ",
-    "aſphalt",
-    //
-    // sr
-    "siſrael",
-    "iſrael",
-]
-
-/**
-Step 5)
+Step 4)
 ---
 This step uses the crossword replace function to try to solve
 any ambiguous S. A dictionary of spelling patterns that can occur
@@ -2584,7 +2579,7 @@ const OMNIPRESENT_PATTERNS = {
 }
 
 /**
-Step 6)
+Step 5)
 ---
 This step uses the crossword replace function to try to solve
 any ambiguous S, but only for patterns
@@ -3496,7 +3491,7 @@ const START_PATTERNS = {
 }
 
 /**
-Step 7)
+Step 6)
 ---
 This step runs postprocess replacements with the crossword search.
 
