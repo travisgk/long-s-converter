@@ -389,6 +389,7 @@ const LONG_S_NAMES = {
         "gushman",
     ],
     "h": [
+        "hampshire",
         "hansl",
         "harish",
         "harsha",
@@ -1437,7 +1438,6 @@ const FORCED_OVERWRITES = [
     //
     // sh
     "daſhboard",
-    "hampſhir",
     "faſhionſ",
     "faſhion",
     "ſhampoo",
