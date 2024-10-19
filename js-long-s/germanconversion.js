@@ -94,7 +94,7 @@ function _fillInDoubleS(word) {
 
 
 function _findBlankIndices(word) {
-        /** Returns a list of indices where any UNKNOWN_S remains in the word.*/
+    /** Returns a list of indices where any UNKNOWN_S remains in the word.*/
     return [...word].map((c, i) => c === UNKNOWN_S ? i : null).filter(i => i !== null);
 }
 
@@ -108,13 +108,18 @@ function convertGermanWord(word) {
     let backupWord = word;
     let cleanWord = _stripConsonantAccents(word.toLowerCase());
 
-    // 0) The program has the conversions of some commonly-used
-    //    words explicitly written in memory, so if the word is one of those,
-    //    the function will return that conversion immediately.
-    
+    /**
+    Step 1)
+    ---
+    The program has the conversions of some commonly-used
+    words and names explicitly written in memory, 
+    so if the word is one of those,
+    the function will return that conversion immediately.
+
+    */
     if (PRINT_DEBUG_TEXT) {
         console.log(`Begins) ${word}`);
-        console.log("Step 0)");
+        console.log("Step 1)");
     }
 
     // matches list are indexed by the starting letter.
@@ -131,7 +136,27 @@ function convertGermanWord(word) {
         }
     }
 
-    let blueprintWord = cleanWord;  // used for indexing and forced replacements.
+    // checks to see if this word is actually a name or a name + "s".
+    const namesList = LONG_S_NAMES[cleanWord[0]]
+    if (namesList) {
+        for (let term of namesList) {
+            if (
+                (cleanWord.slice(-1) === "s" && cleanWord.slice(0, -1) === term) 
+                || cleanWord === term
+            ) {
+                // this is a name that
+                // has all intermittent occurences of S being long.
+                cleanWord = cleanWord.slice(0, -1).replace(/s/g, 'ſ') + cleanWord.slice(-1);
+                word = _transferLongS(term, word);
+                if (PRINT_DEBUG_TEXT) 
+                    console.log(`\t${word}`);
+                return word;
+            }
+        }
+    }
+
+    // saves a copy of the word to use for indexing and forced replacements.
+    let blueprintWord = cleanWord;
     cleanWord = cleanWord.slice(0, -1).replace(/s/g, UNKNOWN_S) + cleanWord.slice(-1);
 
     if (cleanWord.startsWith(UNKNOWN_S)) {
@@ -159,8 +184,13 @@ function convertGermanWord(word) {
         return word;
     }
 
-    // 1) This step applies basic patterns to try to solve any ambiguous S.
-    // ---
+    /**
+    Step 2) 
+    ---
+    This step applies basic patterns to try to solve any ambiguous S.
+    
+    */
+
     // determines which occurrences of S can't be explicitly decided as
     // being a short S (and thereby which ones must definitely be a short S).
     const pattern = FORCE_SHORT_S_BEFORE_Z
@@ -178,13 +208,18 @@ function convertGermanWord(word) {
     cleanWord = _fillInDoubleS(cleanWord);
 
     if (PRINT_DEBUG_TEXT)
-        console.log(`Step 1)\t${word}`);
+        console.log(`Step 2)\t${word}`);
 
-    // 2) This step uses the blueprint replace function to try to solve
-    //    any ambiguous S, but only for patterns
-    //    that occur at the end of words.
+    /**
+    Step 3) 
+    ---
+    This step uses the blueprint replace function to try to solve
+    any ambiguous S, but only for patterns
+    that occur at the end of words.
+
+    */
     if (PRINT_DEBUG_TEXT)
-        console.log("Step 2)");
+        console.log("Step 3)");
 
     let endsList = null;
     if (blueprintWord.length >= 3) {
@@ -213,14 +248,69 @@ function convertGermanWord(word) {
         }
     }
 
-    // 3) This step uses the crossword replace function to try to solve
-    //    any ambiguous S. A dictionary of spelling patterns that can occur
-    //    anywhere in the word are used to try to further solve the spelling.
+    /**
+    Step 4) 
+    ---
+    This step enforces a few exceptional spellings.
+
+    */
+    for (let term of POSTPROCESS_PATTERNS) {
+        if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) break;
+        [cleanWord, madeReplacement] = _crosswordReplace(cleanWord, term);
+        if (madeReplacement) {
+            cleanWord = _fillInDoubleS(cleanWord);
+        }
+    }
+
     if (PRINT_DEBUG_TEXT)
-        console.log("Step 3)");
+        console.log(`Step 4)\t${word}`);
+
+    if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
+        // the word has been fully solved, so it's returned.
+        word = _transferLongS(cleanWord, word);
+        if (PRINT_DEBUG_TEXT)
+            console.log(`\t${word}`);
+        return word;
+    }
+
+    /**
+    Step 5)
+    ---
+    This step uses the crossword replace function to try to solve
+    any ambiguous S. A dictionary of spelling patterns that can occur
+    anywhere in the word are used to try to further solve the spelling.
+
+    */
+    if (PRINT_DEBUG_TEXT)
+        console.log("Step 5)");
+
+    // builds a list of replacement patterns
+    // based on what letters the word is composed of.
+    let isolatedKeys = [
+        "ir", "nt", "er", "et", "en", "at", "r",
+        "ea", "e", "n", "i", "a", "t", "h", "u", "o"
+    ];
+
+    let wordKeys = ["remaining"];
+    isolatedKeys.forEach(key => {
+        if ([...key].every(char => cleanWord.includes(char))) {
+            wordKeys.push(key);
+        }
+    });
+
+    let sCount = Math.min(2, (blueprintWord.match(/s/g) || []).length);
+    let omnipresentPatterns = [];
+
+    isolatedKeys.forEach(wordKey => {
+        omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][sCount]);
+        if (sCount === 2) {
+            omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][1]);
+        }
+    });
+    omnipresentPatterns.sort((a, b) => b.length - a.length);
 
     remainingBlankIndices = _findBlankIndices(cleanWord);
-    for (let term of OMNIPRESENT_PATTERNS) {
+    for (let term of omnipresentPatterns) {
         // loops until no more unknowns remain.
         if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) break;
         [cleanWord, madeReplacement] = _crosswordReplace(cleanWord, term);
@@ -261,17 +351,7 @@ function convertGermanWord(word) {
     if (PRINT_DEBUG_TEXT)
         console.log(`\t\t${word}`);
 
-    // 5) This step runs postprocess replacements with the crossword search.
-    for (let term of POSTPROCESS_PATTERNS) {
-        if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) break;
-        [cleanWord, madeReplacement] = _crosswordReplace(cleanWord, term);
-        if (madeReplacement) {
-            cleanWord = _fillInDoubleS(cleanWord);
-        }
-    }
-
-    if (PRINT_DEBUG_TEXT)
-        console.log(`Step 5)\t${word}`);
+    
 
     // 6) This step enforces a few exceptional spellings.
     for (let term of FORCED_OVERWRITES) {
