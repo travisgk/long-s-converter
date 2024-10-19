@@ -158,6 +158,17 @@ function convertGermanWord(word) {
     // saves a copy of the word to use for indexing and forced replacements.
     let blueprintWord = cleanWord;
     cleanWord = cleanWord.slice(0, -1).replace(/s/g, UNKNOWN_S) + cleanWord.slice(-1);
+  
+    // this step enforces a few exceptional spellings.
+    for (let term of FORCED_OVERWRITES) {
+        if (term.length <= cleanWord.length) {
+            [cleanWord, madeReplacement] = _blueprintReplace(cleanWord, blueprintWord, term);
+            if (madeReplacement) {
+                cleanWord = _fillInDoubleS(cleanWord);
+                // can't break here b/c search is omnipresent.
+            }
+        }
+    }
 
     if (cleanWord.startsWith(UNKNOWN_S)) {
         // S as the first letter in a word is always long.
@@ -251,32 +262,7 @@ function convertGermanWord(word) {
     }
 
     /**
-    Step 4) 
-    ---
-    This step enforces a few exceptional spellings.
-
-    */
-    for (let term of FORCED_OVERWRITES) {
-        if (term.length <= cleanWord.length) {
-            [cleanWord, madeReplacement] = _blueprintReplace(cleanWord, blueprintWord, term);
-            if (madeReplacement) {
-                cleanWord = _fillInDoubleS(cleanWord);
-                // can't break here b/c search is omnipresent.
-            }
-        }
-    }
-
-    if (PRINT_DEBUG_TEXT)
-        console.log(`Step 4)\t${word}`);
-
-    if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
-        // the word has been fully solved, so it's returned.
-        word = _transferLongS(cleanWord, word);
-        return word;
-    }
-
-    /**
-    Step 5)
+    Step 4)
     ---
     This step uses the crossword replace function to try to solve
     any ambiguous S. A dictionary of spelling patterns that can occur
@@ -328,7 +314,7 @@ function convertGermanWord(word) {
         console.log(`\t\t${word}`);
 
     /**
-    Step 6)
+    Step 5)
     ---
     This step uses the crossword replace function to try to solve
     any ambiguous S, but only for patterns
@@ -359,7 +345,7 @@ function convertGermanWord(word) {
         console.log(`\t\t${word}`);
 
     /**
-    Step 7)
+    Step 6)
     ---
     This step runs postprocess replacements with the crossword search.
 
@@ -375,7 +361,6 @@ function convertGermanWord(word) {
     if (PRINT_DEBUG_TEXT)
         console.log(`Step 7)\t${word}`);
     
-
     /**
     Result) 
     ---
