@@ -105,9 +105,6 @@ function convertGermanWord(word) {
     const FORCE_SHORT_S_BEFORE_Z = false;  // False after 1901.
     const PRINT_DEBUG_TEXT = false;
 
-    let backupWord = word;
-    let cleanWord = _stripConsonantAccents(word.toLowerCase());
-
     /**
     Step 1)
     ---
@@ -121,6 +118,9 @@ function convertGermanWord(word) {
         console.log(`Begins) ${word}`);
         console.log("Step 1)");
     }
+
+    let backupWord = word;
+    let cleanWord = _stripConsonantAccents(word.toLowerCase());
 
     // matches list are indexed by the starting letter.
     const exactMatchesList = EXACT_MATCHES[cleanWord[0]];
@@ -240,6 +240,8 @@ function convertGermanWord(word) {
 
                 [cleanSnippet, madeReplacement] = _blueprintReplace(cleanSnippet, blueprintSnippet, term);
                 if (madeReplacement) {
+                    if (PRINT_DEBUG_TEXT)
+                        console.log(`END PATTERN:\t${term}`);
                     cleanWord = cleanWord.slice(0, -term.length) + cleanSnippet;
                     cleanWord = _fillInDoubleS(cleanWord);
                     break;
@@ -254,11 +256,13 @@ function convertGermanWord(word) {
     This step enforces a few exceptional spellings.
 
     */
-    for (let term of POSTPROCESS_PATTERNS) {
-        if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) break;
-        [cleanWord, madeReplacement] = _crosswordReplace(cleanWord, term);
-        if (madeReplacement) {
-            cleanWord = _fillInDoubleS(cleanWord);
+    for (let term of FORCED_OVERWRITES) {
+        if (term.length <= cleanWord.length) {
+            [cleanWord, madeReplacement] = _blueprintReplace(cleanWord, blueprintWord, term);
+            if (madeReplacement) {
+                cleanWord = _fillInDoubleS(cleanWord);
+                // can't break here b/c search is omnipresent.
+            }
         }
     }
 
@@ -268,8 +272,6 @@ function convertGermanWord(word) {
     if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
         // the word has been fully solved, so it's returned.
         word = _transferLongS(cleanWord, word);
-        if (PRINT_DEBUG_TEXT)
-            console.log(`\t${word}`);
         return word;
     }
 
@@ -325,11 +327,16 @@ function convertGermanWord(word) {
     if (PRINT_DEBUG_TEXT)
         console.log(`\t\t${word}`);
 
-    // 4) This step uses the crossword replace function to try to solve
-    //    any ambiguous S, but only for patterns
-    //    that occur at the beginning of words.
+    /**
+    Step 6)
+    ---
+    This step uses the crossword replace function to try to solve
+    any ambiguous S, but only for patterns
+    that occur at the beginning of words.
+
+    */
     if (PRINT_DEBUG_TEXT)
-        console.log("Step 4)");
+        console.log("Step 6)");
 
     const startsList = START_PATTERNS[blueprintWord[0]];
     if (startsList && remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
@@ -351,23 +358,30 @@ function convertGermanWord(word) {
     if (PRINT_DEBUG_TEXT)
         console.log(`\t\t${word}`);
 
-    
+    /**
+    Step 7)
+    ---
+    This step runs postprocess replacements with the crossword search.
 
-    // 6) This step enforces a few exceptional spellings.
-    for (let term of FORCED_OVERWRITES) {
-        if (term.length <= cleanWord.length) {
-            [cleanWord, madeReplacement] = _blueprintReplace(cleanWord, blueprintWord, term);
-            if (madeReplacement) {
-                cleanWord = _fillInDoubleS(cleanWord);
-                // can't break here b/c search is omnipresent.
-            }
+    */
+    for (let term of POSTPROCESS_PATTERNS) {
+        if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) break;
+        [cleanWord, madeReplacement] = _crosswordReplace(cleanWord, term);
+        if (madeReplacement) {
+            cleanWord = _fillInDoubleS(cleanWord);
         }
     }
 
     if (PRINT_DEBUG_TEXT)
-        console.log(`Step 6)\t${word}`);
+        console.log(`Step 7)\t${word}`);
+    
 
-    // Result) The word is cleaned up and returned.
+    /**
+    Result) 
+    ---
+    The word is cleaned up and returned.
+
+    */
     if (DEFAULT_UNKNOWNS_TO_LONG_S) {
         cleanWord = cleanWord.replace(new RegExp(UNKNOWN_S, 'g'), 'ſ');
     }
