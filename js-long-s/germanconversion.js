@@ -147,7 +147,7 @@ function convertGermanWord(word) {
                 // this is a name that
                 // has all intermittent occurences of S being long.
                 cleanWord = cleanWord.slice(0, -1).replace(/s/g, 'ſ') + cleanWord.slice(-1);
-                word = _transferLongS(term, word);
+                word = _transferLongS(term, cleanWord);
                 if (PRINT_DEBUG_TEXT) 
                     console.log(`\t${word}`);
                 return word;
