@@ -289,7 +289,7 @@ function convertGermanWord(word) {
     let sCount = Math.min(2, (blueprintWord.match(/s/g) || []).length);
     let omnipresentPatterns = [];
 
-    isolatedKeys.forEach(wordKey => {
+    wordKeys.forEach(wordKey => {
         omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][sCount]);
         if (sCount === 2) {
             omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][1]);
@@ -312,6 +312,14 @@ function convertGermanWord(word) {
 
     if (PRINT_DEBUG_TEXT)
         console.log(`\t\t${word}`);
+
+    if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
+        // the word has been fully solved, so it's returned.
+        word = _transferLongS(cleanWord, word);
+        if (PRINT_DEBUG_TEXT)
+            console.log(`\t${word}`);
+        return word;
+    }
 
     /**
     Step 5)
