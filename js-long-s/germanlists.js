@@ -1,10 +1,10 @@
 /**
-Filename: _german_lists.py
+Filename: germanlists.js
 Description: This contains spelling patterns of the long S 
-     in the German language. These are used to fill in uncertainties.
+             in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.3b
+Version: 1.0.5
 
 License: MIT License
 */
@@ -141,6 +141,7 @@ const EXACT_MATCHES = {
     ],
     "h": [
         "hauptſtadt",
+        "heapſort",
         "hauſe"
     ],
     "i": [
@@ -207,6 +208,9 @@ const EXACT_MATCHES = {
         "perſonen",
         "pilſner",
         "perſon"
+    ],
+    "q": [
+        "quickſort"
     ],
     "r": [
         "ringsum"
@@ -561,6 +565,7 @@ const LONG_S_NAMES = {
     ]
 }
 
+
 /**
 Step 2 includes some few exceptional spellings.
 */
@@ -640,6 +645,7 @@ const FORCED_OVERWRITES = [
     "ſlip",
     "waſh"
 ]
+
 
 /**
 Step 3) 
@@ -1046,7 +1052,6 @@ const END_PATTERNS = {
     "en": [
         "ſiſtiſchen",
         "iſtiſchen",
-        "chſenden",
         "sphobien",
         "ſchenden",
         "ſologien",
@@ -1251,7 +1256,6 @@ const END_PATTERNS = {
     "e": [
         "ſiſtiſche",
         "iſtiſche",
-        "chſende",
         "sphobie",
         "ſchende",
         "ſiatrie",
@@ -1261,7 +1265,6 @@ const END_PATTERNS = {
         "skunde",
         "ſelnde",
         "ſiſche",
-        "ſſende",
         "ſſoide",
         "ſſteme",
         "ſtrafe",
@@ -1452,6 +1455,7 @@ const END_PATTERNS = {
     ],
     "t": [
         "ſſigkeit",
+        "reſſort",
         "sanwalt",
         "ſigkeit",
         "ſtätigt",
@@ -1496,6 +1500,7 @@ const END_PATTERNS = {
     ]
 }
 
+
 /**
 Step 4)
 ---
@@ -1506,47 +1511,13 @@ anywhere in the word are used to try to further solve the spelling.
 */
 const OMNIPRESENT_PATTERNS = {
     "ir": {
-        "2": [
-            "intrauterinpeſſar",
-            "dreiflüſseſtädte",
-            "dreiflüſseſtadt",
-            "briefaustauſch",
-            "bonapartismus",
-            "perkuſſoriſch",
-            "beeinfluſſer",
-            "saustreibung",
-            "szuverläſſig",
-            "tripartismus",
-            "verhältniſſe",
-            "intereſſant",
-            "kaſſapreise",
-            "renaiſſance",
-            "chartismus",
-            "sausarbeit",
-            "sinduſtrie",
-            "sintereſſe",
-            "intereſſe",
-            "kommiſſar",
-            "kommiſſär",
-            "saustrieb",
-            "saustritt",
-            "seintrags",
-            "sereignis",
-            "stranſpir",
-            "clariſſa",
-            "jahresſi",
-            "oſſarium",
-            "ruſſiſch",
-            "sarbeits",
-            "adreſſi",
-            "diſſert",
-            "piſſoir",
-            "oriſſa",
-            "riſsa",
-            "sſir"
-        ],
         "1": [
             "arbeitsoverall",
+            "friedrichsthal",
+            "friedrichsthäl",
+            "friedrichsort",
+            "friedrichstal",
+            "friedrichstäl",
             "gleichſchrift",
             "sannullierung",
             "friedensheit",
@@ -1584,12 +1555,14 @@ const OMNIPRESENT_PATTERNS = {
             "ſorgfältig",
             "verhältnis",
             "arbeitſam",
+            "auftritts",
             "ausarbeit",
             "diskutier",
             "disponier",
             "eintritts",
             "konkurſit",
             "kreischef",
+            "sauftritt",
             "seindruck",
             "seindrück",
             "seintritt",
@@ -1597,6 +1570,8 @@ const OMNIPRESENT_PATTERNS = {
             "straining",
             "trainings",
             "werkſtein",
+            "abtritts",
+            "antritts",
             "austrieb",
             "austritt",
             "beitrags",
@@ -1604,7 +1579,9 @@ const OMNIPRESENT_PATTERNS = {
             "brüskier",
             "diſtrikt",
             "eintrags",
+            "gerichts",
             "graphieſ",
+            "santritt",
             "schronik",
             "seintrag",
             "seinträg",
@@ -1627,6 +1604,7 @@ const OMNIPRESENT_PATTERNS = {
             "sziffer",
             "vereins",
             "kriegs",
+            "praxis",
             "reichs",
             "riskie",
             "ſcript",
@@ -1636,6 +1614,44 @@ const OMNIPRESENT_PATTERNS = {
             "seinr",
             "sirr",
             "ſitr"
+        ],
+        "2": [
+            "intrauterinpeſſar",
+            "dreiflüſseſtädte",
+            "dreiflüſseſtadt",
+            "briefaustauſch",
+            "bonapartismus",
+            "perkuſſoriſch",
+            "beeinfluſſer",
+            "saustreibung",
+            "szuverläſſig",
+            "tripartismus",
+            "verhältniſſe",
+            "intereſſant",
+            "kaſſapreise",
+            "renaiſſance",
+            "chartismus",
+            "sausarbeit",
+            "sinduſtrie",
+            "sintereſſe",
+            "intereſſe",
+            "kommiſſar",
+            "kommiſſär",
+            "saustrieb",
+            "saustritt",
+            "seintrags",
+            "sereignis",
+            "stranſpir",
+            "clariſſa",
+            "oſſarium",
+            "ruſſiſch",
+            "sarbeits",
+            "adreſſi",
+            "diſſert",
+            "piſſoir",
+            "oriſſa",
+            "riſsa",
+            "sſir"
         ]
     },
     "nt": {
@@ -1657,6 +1673,7 @@ const OMNIPRESENT_PATTERNS = {
             "rechtſehen",
             "rechtſtand",
             "rechtſtänd",
+            "unfallsort",
             "unterhalts",
             "anhaltſam",
             "diſtichon",
@@ -1666,6 +1683,7 @@ const OMNIPRESENT_PATTERNS = {
             "redensart",
             "ſparkonto",
             "transport",
+            "andachts",
             "einfalts",
             "einſteig",
             "einſtieg",
@@ -1698,6 +1716,7 @@ const OMNIPRESENT_PATTERNS = {
             "sentlad",
             "wiſentf",
             "kunfts",
+            "monats",
             "spunkt",
             "sunter",
             "ſition",
@@ -1764,6 +1783,7 @@ const OMNIPRESENT_PATTERNS = {
             "herbergsſuche",
             "ſpruchsteller",
             "hausterraſſe",
+            "prozeſsende",
             "rechtſtatus",
             "skongreſſes",
             "kongreſſes",
@@ -1789,6 +1809,8 @@ const OMNIPRESENT_PATTERNS = {
             "prozeſſe",
             "sſattler",
             "sſsphäre",
+            "verſuchs",
+            "meſsort",
             "prozeſs",
             "reſſort",
             "sadreſſ",
@@ -1854,6 +1876,7 @@ const OMNIPRESENT_PATTERNS = {
             "werkſtück",
             "gröſzern",
             "konkurſe",
+            "kursende",
             "parmeſan",
             "rechtſam",
             "sangehör",
@@ -1867,6 +1890,7 @@ const OMNIPRESENT_PATTERNS = {
             "farbenſ",
             "geburts",
             "halberſ",
+            "jürgens",
             "röschen",
             "serfahr",
             "serhalt",
@@ -1881,6 +1905,7 @@ const OMNIPRESENT_PATTERNS = {
             "alters",
             "auſter",
             "berufs",
+            "jahres",
             "meeres",
             "rechts",
             "sadler",
@@ -1961,6 +1986,7 @@ const OMNIPRESENT_PATTERNS = {
             "thalaſſämie",
             "sſchoſſeſt",
             "ſchloſſeſt",
+            "geſchäfts",
             "ſchoſſeſt",
             "diesſeit",
             "sabſteig",
@@ -2089,6 +2115,7 @@ const OMNIPRESENT_PATTERNS = {
             "glückſtadt",
             "saktivität",
             "auftrags",
+            "quartals",
             "ſorgfalt",
             "trauſaal",
             "wachstum",
@@ -2135,6 +2162,7 @@ const OMNIPRESENT_PATTERNS = {
         "2": [
             "saustauſch",
             "ſchiffstau",
+            "ſchlagsort",
             "austauſch",
             "majſstäts",
             "sausſicht",
@@ -2173,8 +2201,11 @@ const OMNIPRESENT_PATTERNS = {
             "grauſam",
             "konkurs",
             "konſumr",
+            "kursort",
+            "surlaub",
             "szuordn",
             "szurück",
+            "urlaubs",
             "schron",
             "chorſ",
             "grafſ",
@@ -2351,6 +2382,7 @@ const OMNIPRESENT_PATTERNS = {
             "lomonoſſow",
             "sanſchluſs",
             "diſſonanz",
+            "faſchings",
             "muſſolini",
             "sanſchlag",
             "sanſchläg",
@@ -2362,17 +2394,18 @@ const OMNIPRESENT_PATTERNS = {
             "inkaſſo",
             "sanlaſſ",
             "sanläſſ",
-            "ſſionsſ",
             "ſſungsſ",
             "aſſung",
             "knoſſo",
             "niſſan",
+            "ſſions",
             "ſſungs",
             "ſungsſ",
             "uſſung",
             "aſſon",
             "sausn",
             "sſonn",
+            "ſions",
             "ſſung",
             "ſungs",
             "ungsſ",
@@ -2479,6 +2512,7 @@ const OMNIPRESENT_PATTERNS = {
             "auſim",
             "auſip",
             "hilfs",
+            "ikums",
             "iſoba",
             "lichſ",
             "ſpitz",
@@ -2510,6 +2544,45 @@ const OMNIPRESENT_PATTERNS = {
         ]
     },
     "a": {
+        "1": [
+            "abſchläg",
+            "spädagog",
+            "klauſu",
+            "vaſall",
+            "ausüb",
+            "baſal",
+            "bauſa",
+            "bauſo",
+            "bauſp",
+            "fachſ",
+            "hausä",
+            "kauſa",
+            "syoga",
+            "szahl",
+            "aſch",
+            "ausa",
+            "ausk",
+            "auso",
+            "ausp",
+            "ausu",
+            "ausz",
+            "auſä",
+            "auſü",
+            "malſ",
+            "sagg",
+            "sakk",
+            "sall",
+            "sapp",
+            "sauf",
+            "ſadd",
+            "ſaff",
+            "ſamm",
+            "sab",
+            "saq",
+            "ſaj",
+            "ſaß",
+            "ſaw"
+        ],
         "2": [
             "sabſchluſs",
             "ausſchlag",
@@ -2584,48 +2657,11 @@ const OMNIPRESENT_PATTERNS = {
             "ſsap",
             "ſſay",
             "uſsa"
-        ],
-        "1": [
-            "spädagog",
-            "klauſu",
-            "vaſall",
-            "ausüb",
-            "baſal",
-            "bauſa",
-            "bauſo",
-            "bauſp",
-            "fachſ",
-            "hausä",
-            "kauſa",
-            "syoga",
-            "szahl",
-            "aſch",
-            "ausa",
-            "ausk",
-            "auso",
-            "ausp",
-            "ausu",
-            "ausz",
-            "auſä",
-            "auſü",
-            "malſ",
-            "sagg",
-            "sakk",
-            "sall",
-            "sapp",
-            "sauf",
-            "ſadd",
-            "ſaff",
-            "ſamm",
-            "sab",
-            "saq",
-            "ſaj",
-            "ſaß",
-            "ſaw"
         ]
     },
     "t": {
         "1": [
+            "zufluchts",
             "zugſtoff",
             "zugſtäb",
             "ſcotch",
@@ -2885,6 +2921,7 @@ const OMNIPRESENT_PATTERNS = {
         ]
     }
 }
+
 
 /**
 Step 5)
@@ -3509,6 +3546,7 @@ const START_PATTERNS = {
     "o": [
         "orgasmusſ",
         "orgasmus",
+        "ortsende",
         "omnibus",
         "orcheſt",
         "oberſ",
@@ -3663,7 +3701,6 @@ const START_PATTERNS = {
         "teilſ",
         "teleſ",
         "teſsſ",
-        "texts",
         "tiefſ",
         "tierſ",
         "todes",
@@ -3713,7 +3750,6 @@ const START_PATTERNS = {
         "vorausgeſ",
         "vorbeigeſ",
         "vorhergeſ",
-        "verſuchſ",
         "verſauf",
         "verſäuf",
         "verſuch",
