@@ -4,12 +4,39 @@ Description: This contains the complex function that inserts the long S
              into the German language.
 
 Author: TravisGK
-Version: 1.0
+Version: 1.0.1
 
 License: MIT License
 */
 
 const UNKNOWN_S = 'φ';
+
+
+function _stripToGermanAlphabet(word) {
+    /**
+     * Returns text with any accent marks removed (besides umlauts).
+     * If there's an issue due to a foreign character
+     * (i.e. one character becomes two),
+     * then the word is just returned.
+     */
+    let result = "";
+    const noAccents = _stripAccents(word);
+
+    if (word.length !== noAccents.length) {
+        return word;
+    }
+
+    for (let i = 0; i < noAccents.length; i++) {
+        const nChar = noAccents[i];
+        if ("AÄEIOÖUÜYaäeioöuüy".includes(word[i])) {
+            result += word[i];
+        } else {
+            result += nChar;
+        }
+    }
+
+    return result;
+}
 
 
 function cartesianProduct(arr) {
@@ -120,7 +147,7 @@ function convertGermanWord(word) {
     }
 
     let backupWord = word;
-    let cleanWord = _stripConsonantAccents(word.toLowerCase());
+    let cleanWord = _stripToGermanAlphabet(word.toLowerCase());
 
     // matches list are indexed by the starting letter.
     const exactMatchesList = EXACT_MATCHES[cleanWord[0]];
