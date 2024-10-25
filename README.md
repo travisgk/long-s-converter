@@ -1,6 +1,6 @@
 # long-s-converter
 ### [Click here to use the converter.](https://travisgk.github.io/long-s-converter/)
-This is a JavaScript tool that converts text to **accurately** use the archaic long S letter ( ſ ) in its spellings.
+This online tool can be used to **accurately** insert the historical long S character (&nbsp;ſ&nbsp;) into text to make it appear as it would two centuries ago.
 
 English, French, German, Spanish, and Italian are supported.
 
