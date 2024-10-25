@@ -1,6 +1,6 @@
 # long-s-converter
 ### [Click here to use the converter.](https://travisgk.github.io/long-s-converter/)
-This online tool accurately inserts the historical long S character (&nbsp;ſ&nbsp;) back into text to make it appear as if it were written before the 20th century.
+This online tool accurately inserts the historical long S character (&nbsp;ſ&nbsp;) back into text in order to make it appear as if it were written before the 20th century.
 
 English, French, German, Spanish and Italian are supported.
 
