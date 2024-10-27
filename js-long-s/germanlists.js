@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.7
+Version: 1.0.7a
 
 License: MIT License
 */
@@ -649,6 +649,7 @@ const FORCED_OVERWRITES = [
     "ſkript",
     "ſlogan",
     "ſlowak",
+    "ſteuer",
     "viſcer",
     "craſh",
     "flaſh",
@@ -1567,6 +1568,7 @@ const OMNIPRESENT_PATTERNS = {
             "sannullierung",
             "friedensheit",
             "gleichſchwer",
+            "gleichſteuer",
             "rechtſcheibe",
             "rechtſchicht",
             "rechtſchrift",
@@ -1718,7 +1720,6 @@ const OMNIPRESENT_PATTERNS = {
         "1": [
             "bertoldsbrunnen",
             "spachteldeckung",
-            "aufwandſteuer",
             "desungeachtet",
             "kentumſprache",
             "rechtſpannung",
@@ -1916,6 +1917,7 @@ const OMNIPRESENT_PATTERNS = {
             "charakterſlot",
             "spachtvertrag",
             "fahrtſtrecke",
+            "verkehrſtraß",
             "fahrtſtraße",
             "rechtſchaff",
             "rechtſchale",
@@ -1944,6 +1946,7 @@ const OMNIPRESENT_PATTERNS = {
             "serklärung",
             "sparameter",
             "spyrometer",
+            "tragſteuer",
             "verbrauchs",
             "verfahrens",
             "werkſchaft",
