@@ -4,7 +4,7 @@ Description: This contains the complex function that inserts the long S
              into the German language.
 
 Author: TravisGK
-Version: 1.0.1
+Version: 1.0.2
 
 License: MIT License
 */
@@ -81,9 +81,13 @@ function _crosswordReplace(text, spellingPattern) {
         return [text, false];
     }
 
-    const options = [...spellingPattern].map(c => (c === 'ſ' || c === 's') ? [c, UNKNOWN_S] : [c]);
+    const options = [...spellingPattern].map(
+        c => (c === 'ſ' || c === 's') ? [c, UNKNOWN_S] : [c]
+    );
     const combos = cartesianProduct(options);
-    const possibleTerms = combos.filter(combo => combo.includes(UNKNOWN_S)).map(combo => combo.join(''));
+    const possibleTerms = combos.filter(
+        combo => combo.includes(UNKNOWN_S)).map(combo => combo.join('')
+    );
 
     let oldText = text;
     for (let possibleTerm of possibleTerms) {
@@ -101,7 +105,11 @@ function _blueprintReplace(text, blueprintText, spellingPattern) {
     */
 
     const patternWithoutLongS = spellingPattern.replace(/ſ/g, 's');
-    const matchedIndices = [...blueprintText.matchAll(new RegExp(escapeRegex(patternWithoutLongS), 'g'))].map(m => m.index);
+    const matchedIndices = [
+        ...blueprintText.matchAll(
+            new RegExp(escapeRegex(patternWithoutLongS), 'g')
+        )
+    ].map(m => m.index);
 
     for (let index of matchedIndices) {
         const endIndex = index + spellingPattern.length;
@@ -122,7 +130,22 @@ function _fillInDoubleS(word) {
 
 function _findBlankIndices(word) {
     /** Returns a list of indices where any UNKNOWN_S remains in the word.*/
-    return [...word].map((c, i) => c === UNKNOWN_S ? i : null).filter(i => i !== null);
+    return [...word].map(
+        (c, i) => c === UNKNOWN_S ? i : null).filter(i => i !== null
+    );
+}
+
+
+function _applyTestException(text, originallyCapitalized) {
+    /**
+    Returns the given word with a particular pattern applied.
+    if the given word was originally capitalized, then it's a noun
+    and the pattern "ſteſt" will become "steſt".
+    */
+    if (!originallyCapitalized) {
+        return text;
+    }
+    return text.replace(/ſteſt/g, "steſt");
 }
 
 
@@ -173,7 +196,10 @@ function convertGermanWord(word) {
             ) {
                 // this is a name that
                 // has all intermittent occurences of S being long.
-                cleanWord = cleanWord.slice(0, -1).replace(/s/g, 'ſ') + cleanWord.slice(-1);
+                cleanWord = (
+                    cleanWord.slice(0, -1).replace(/s/g, 'ſ') 
+                    + cleanWord.slice(-1)
+                );
                 word = _transferLongS(cleanWord, word);
                 if (PRINT_DEBUG_TEXT) 
                     console.log(`\t${word}`);
@@ -184,12 +210,22 @@ function convertGermanWord(word) {
 
     // saves a copy of the word to use for indexing and forced replacements.
     let blueprintWord = cleanWord;
-    cleanWord = cleanWord.slice(0, -1).replace(/s/g, UNKNOWN_S) + cleanWord.slice(-1);
+    cleanWord = (
+        cleanWord.slice(0, -1).replace(/s/g, UNKNOWN_S) 
+        + cleanWord.slice(-1)
+    );
   
-    // this step enforces a few exceptional spellings.
+    /**
+    Step 2a)
+    ---
+    This step enforces a few exceptional spellings.
+
+    */
     for (let term of FORCED_OVERWRITES) {
         if (term.length <= cleanWord.length) {
-            [cleanWord, madeReplacement] = _blueprintReplace(cleanWord, blueprintWord, term);
+            [cleanWord, madeReplacement] = _blueprintReplace(
+                cleanWord, blueprintWord, term
+            );
             if (madeReplacement) {
                 cleanWord = _fillInDoubleS(cleanWord);
                 // can't break here b/c search is omnipresent.
@@ -216,6 +252,8 @@ function convertGermanWord(word) {
 
     if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
         // the word has been fully solved, so it's returned.
+        let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
+        cleanWord = _applyTestException(cleanWord, isUpper);
         word = _transferLongS(cleanWord, word);
         if (PRINT_DEBUG_TEXT)
             console.log(`\t${word}`);
@@ -223,7 +261,7 @@ function convertGermanWord(word) {
     }
 
     /**
-    Step 2) 
+    Step 2b) 
     ---
     This step applies basic patterns to try to solve any ambiguous S.
     
@@ -235,8 +273,12 @@ function convertGermanWord(word) {
         ? `${UNKNOWN_S}(?=[aäceioöpſ${UNKNOWN_S}tuüy])`
         : `${UNKNOWN_S}(?=[aäceioöpſ${UNKNOWN_S}tuüyz])`;
     
-    const uncertainIndices = [...cleanWord.matchAll(new RegExp(pattern, 'g'))].map(m => m.index);
-    const certainShortSIndices = [...cleanWord].map((c, i) => (c === UNKNOWN_S && !uncertainIndices.includes(i)) ? i : null).filter(i => i !== null);
+    const uncertainIndices = [
+        ...cleanWord.matchAll(new RegExp(pattern, 'g'))
+    ].map(m => m.index);
+    const certainShortSIndices = [...cleanWord].map(
+        (c, i) => (c === UNKNOWN_S && !uncertainIndices.includes(i)) ? i : null
+    ).filter(i => i !== null);
 
     // fills in any determined short S from the pattern.
     for (let index of certainShortSIndices) {
@@ -276,7 +318,9 @@ function convertGermanWord(word) {
                 let cleanSnippet = cleanWord.slice(-term.length);
                 let blueprintSnippet = blueprintWord.slice(-term.length);
 
-                [cleanSnippet, madeReplacement] = _blueprintReplace(cleanSnippet, blueprintSnippet, term);
+                [cleanSnippet, madeReplacement] = _blueprintReplace(
+                    cleanSnippet, blueprintSnippet, term
+                );
                 if (madeReplacement) {
                     if (PRINT_DEBUG_TEXT)
                         console.log(`END PATTERN:\t${term}`);
@@ -317,9 +361,13 @@ function convertGermanWord(word) {
     let omnipresentPatterns = [];
 
     wordKeys.forEach(wordKey => {
-        omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][sCount]);
+        omnipresentPatterns = omnipresentPatterns.concat(
+            OMNIPRESENT_PATTERNS[wordKey][sCount]
+        );
         if (sCount === 2) {
-            omnipresentPatterns = omnipresentPatterns.concat(OMNIPRESENT_PATTERNS[wordKey][1]);
+            omnipresentPatterns = omnipresentPatterns.concat(
+                OMNIPRESENT_PATTERNS[wordKey][1]
+            );
         }
     });
     omnipresentPatterns.sort((a, b) => b.length - a.length);
@@ -342,6 +390,8 @@ function convertGermanWord(word) {
 
     if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
         // the word has been fully solved, so it's returned.
+        let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
+        cleanWord = _applyTestException(cleanWord, isUpper);
         word = _transferLongS(cleanWord, word);
         if (PRINT_DEBUG_TEXT)
             console.log(`\t${word}`);
@@ -360,11 +410,16 @@ function convertGermanWord(word) {
         console.log("Step 6)");
 
     const startsList = START_PATTERNS[blueprintWord[0]];
-    if (startsList && remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
+    if (
+        startsList
+        && remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)
+    ) {
         for (let term of startsList) {
             if (term.length <= cleanWord.length) {
                 let cleanSnippet = cleanWord.slice(0, term.length);
-                [cleanSnippet, madeReplacement] = _crosswordReplace(cleanSnippet, term);
+                [cleanSnippet, madeReplacement] = _crosswordReplace(
+                    cleanSnippet, term
+                );
                 if (madeReplacement) {
                     if (PRINT_DEBUG_TEXT)
                         console.log(`\tSTART PATTERN: ${term}`);
@@ -405,6 +460,9 @@ function convertGermanWord(word) {
     if (DEFAULT_UNKNOWNS_TO_LONG_S) {
         cleanWord = cleanWord.replace(new RegExp(UNKNOWN_S, 'g'), 'ſ');
     }
+
+    let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
+    cleanWord = _applyTestException(cleanWord, isUpper);
 
     if (PRINT_DEBUG_TEXT)
         console.log(`Result\t${word}`);
