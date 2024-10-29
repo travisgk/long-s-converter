@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.8a
+Version: 1.0.9
 
 License: MIT License
 */
@@ -1588,6 +1588,7 @@ const OMNIPRESENT_PATTERNS = {
             "seinſteiger",
             "speterſilie",
             "ſtandſtreif",
+            "auspreiſen",
             "chartismus",
             "sanſchreib",
             "sanſchrieb",
@@ -1596,9 +1597,11 @@ const OMNIPRESENT_PATTERNS = {
             "sinduſtrie",
             "sintereſſe",
             "spenſorium",
+            "auspreiſt",
             "intereſſe",
             "kommiſſar",
             "kommiſſär",
+            "preiſteſt",
             "sanſtrich",
             "saustrieb",
             "saustritt",
@@ -1617,7 +1620,7 @@ const OMNIPRESENT_PATTERNS = {
             "piſſoir",
             "oriſſa",
             "preisſ",
-            "spreiſ",
+            "spreis",
             "riſsa",
             "sſir"
         ],
@@ -1765,6 +1768,7 @@ const OMNIPRESENT_PATTERNS = {
             "tritts",
             "viſzer",
             "freiſ",
+            "preis",
             "richſ",
             "seinr",
             "strio",
@@ -2135,7 +2139,6 @@ const OMNIPRESENT_PATTERNS = {
             "ſcreen",
             "bergſ",
             "sober",
-            "sober",
             "süber",
             "ſcore",
             "werks",
@@ -2323,6 +2326,7 @@ const OMNIPRESENT_PATTERNS = {
             "namens",
             "öſchen",
             "sebene",
+            "sindex",
             "szange",
             "ſungen",
             "üſchen",
@@ -2787,6 +2791,7 @@ const OMNIPRESENT_PATTERNS = {
             "obſzön",
             "sanzug",
             "sanzüg",
+            "sindiz",
             "szwang",
             "wandſp",
             "auſin",
