@@ -4,7 +4,7 @@ Description: This contains the complex function that inserts the long S
              into the German language.
 
 Author: TravisGK
-Version: 1.0.2
+Version: 1.0.3
 
 License: MIT License
 */
@@ -136,19 +136,6 @@ function _findBlankIndices(word) {
 }
 
 
-function _applyTestException(text, originallyCapitalized) {
-    /**
-    Returns the given word with a particular pattern applied.
-    if the given word was originally capitalized, then it's a noun
-    and the pattern "ſteſt" will become "steſt".
-    */
-    if (!originallyCapitalized) {
-        return text;
-    }
-    return text.replace(/ſteſt/g, "steſt");
-}
-
-
 function convertGermanWord(word) {
     /** Returns German text with the long S (ſ) placed appropriately. */
     const DEFAULT_UNKNOWNS_TO_LONG_S = true;  // True by default.
@@ -252,8 +239,6 @@ function convertGermanWord(word) {
 
     if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
         // the word has been fully solved, so it's returned.
-        let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
-        cleanWord = _applyTestException(cleanWord, isUpper);
         word = _transferLongS(cleanWord, word);
         if (PRINT_DEBUG_TEXT)
             console.log(`\t${word}`);
@@ -390,8 +375,6 @@ function convertGermanWord(word) {
 
     if (!remainingBlankIndices.some(i => cleanWord[i] === UNKNOWN_S)) {
         // the word has been fully solved, so it's returned.
-        let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
-        cleanWord = _applyTestException(cleanWord, isUpper);
         word = _transferLongS(cleanWord, word);
         if (PRINT_DEBUG_TEXT)
             console.log(`\t${word}`);
@@ -460,9 +443,6 @@ function convertGermanWord(word) {
     if (DEFAULT_UNKNOWNS_TO_LONG_S) {
         cleanWord = cleanWord.replace(new RegExp(UNKNOWN_S, 'g'), 'ſ');
     }
-
-    let isUpper = backupWord.charAt(0) === backupWord.charAt(0).toUpperCase();
-    cleanWord = _applyTestException(cleanWord, isUpper);
 
     if (PRINT_DEBUG_TEXT)
         console.log(`Result\t${word}`);
