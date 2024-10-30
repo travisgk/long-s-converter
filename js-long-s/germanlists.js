@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.09c
+Version: 1.0.9e
 
 License: MIT License
 */
@@ -31,10 +31,14 @@ const EXACT_MATCHES = {
         "arbeitsplatz",
         "ausſtellung",
         "anſichten",
+        "austeſten",
+        "austeſter",
         "alleſamt",
+        "austeſte",
         "anſicht",
         "aſumboa",
-        "ausland"
+        "ausland",
+        "austeſt"
     ],
     "b": [
         "bundesregierung",
