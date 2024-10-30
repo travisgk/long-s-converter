@@ -2317,8 +2317,7 @@ const OMNIPRESENT_PATTERNS = {
             "ſſeth",
             "ſſett",
             "ſſety",
-            "ſetſ",
-            "ſteſ"
+            "ſetſ"
         ],
         "1": [
             "gleichſchicht",
