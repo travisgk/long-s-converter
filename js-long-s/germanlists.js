@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.9e
+Version: 1.0.91
 
 License: MIT License
 */
@@ -298,11 +298,14 @@ const LONG_S_NAMES = {
         "alessandro",
         "ashdowning",
         "ashenhurst",
+        "asheville",
         "ashington",
         "ashkenazi",
+        "ashtabula",
         "ausherman",
         "ashcraft",
         "ashcroft",
+        "asheboro",
         "ashfield",
         "ashforde",
         "ashleigh",
@@ -313,6 +316,7 @@ const LONG_S_NAMES = {
         "ashella",
         "asherah",
         "ashford",
+        "ashland",
         "ashleen",
         "ashmead",
         "ashmore",
@@ -371,8 +375,10 @@ const LONG_S_NAMES = {
         "bash"
     ],
     "c": [
+        "chickasha",
         "cashmore",
-        "cashman"
+        "cashman",
+        "cushing"
     ],
     "d": [
         "dashiell",
@@ -402,6 +408,7 @@ const LONG_S_NAMES = {
         "fashbinder",
         "fishbein",
         "fishwick",
+        "flushing",
         "fashawn",
         "fashner",
         "feshman",
@@ -412,12 +419,15 @@ const LONG_S_NAMES = {
         "gashler",
         "gresham",
         "gushman",
-        "gashon"
+        "gashon",
+        "goshen"
     ],
     "h": [
+        "hampshire",
         "harshita",
         "hershman",
         "henshaw",
+        "hershey",
         "hushman",
         "harish",
         "harsha",
@@ -428,6 +438,7 @@ const LONG_S_NAMES = {
     ],
     "i": [
         "ishmaelita",
+        "ishpeming",
         "ishanvi",
         "ishaque",
         "ishmael",
@@ -446,6 +457,7 @@ const LONG_S_NAMES = {
     "k": [
         "kashnikov",
         "kingston",
+        "kenosha",
         "kershaw",
         "keshner",
         "kishore",
@@ -473,11 +485,14 @@ const LONG_S_NAMES = {
     "m": [
         "mccloshen",
         "mcpherson",
+        "mishawaka",
+        "marshall",
         "mashenko",
         "mcintosh",
         "meshulam",
         "moshenko",
         "mukissos",
+        "menasha",
         "meshach",
         "mishael",
         "mishkin",
@@ -489,23 +504,28 @@ const LONG_S_NAMES = {
         "moshe"
     ],
     "n": [
+        "nashville",
         "nashaun",
         "nashira",
         "nashman",
         "natasha",
         "nishika",
         "nishita",
+        "nashua",
+        "neosso",
         "nishad",
         "nishan",
         "nasha",
         "nash"
     ],
     "o": [
+        "oshkosh",
         "o'shea",
         "oshana",
         "oshan"
     ],
     "p": [
+        "peshtigo",
         "prashant",
         "pashkov",
         "pashner",
@@ -536,6 +556,7 @@ const LONG_S_NAMES = {
         "roshni"
     ],
     "s": [
+        "sausalito",
         "shantelle",
         "shoshana",
         "shantay",
@@ -576,7 +597,9 @@ const LONG_S_NAMES = {
         "vishnu"
     ],
     "w": [
+        "washington",
         "washburn",
+        "waukesha",
         "wishart"
     ],
     "y": [
@@ -1244,6 +1267,7 @@ const END_PATTERNS = {
     ],
     "ns": [
         "sſteins",
+        "stowns",
         "ſſerns",
         "ſteins",
         "ſerns",
@@ -1464,6 +1488,7 @@ const END_PATTERNS = {
         "ſterin",
         "öſern",
         "stion",
+        "stown",
         "ſerin",
         "ſſeln",
         "ſſern",
