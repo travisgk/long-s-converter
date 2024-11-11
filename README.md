@@ -6,6 +6,10 @@ English, French, German, Spanish and Italian are supported.
 
 <br>
 
+![German Example](https://raw.githubusercontent.com/travisgk/long-s-converter/main/example.png)
+
+<br>
+
 ## Python Repo
 This is a JavaScript version of my original Python code found at [py-long-s](https://github.com/travisgk/py-long-s).
 
