@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.92
+Version: 1.0.93
 
 License: MIT License
 */
@@ -1850,6 +1850,7 @@ const OMNIPRESENT_PATTERNS = {
             "sanreiz",
             "sarbeit",
             "sirrtum",
+            "sorient",
             "spartei",
             "speriod",
             "spicker",
@@ -2301,6 +2302,7 @@ const OMNIPRESENT_PATTERNS = {
             "sober",
             "süber",
             "ſcore",
+            "werbs",
             "werks",
             "wertſ",
             "lerſ",
@@ -2313,6 +2315,7 @@ const OMNIPRESENT_PATTERNS = {
     "et": {
         "2": [
             "geſchmacksteſt",
+            "ſtiegſchacht",
             "geſchlechts",
             "sſchloſſeſt",
             "thalaſſämie",
@@ -2351,6 +2354,7 @@ const OMNIPRESENT_PATTERNS = {
             "szeitſ",
             "ſstäte",
             "ſtehſt",
+            "ſtiegs",
             "ſyſtem",
             "uſſeſt",
             "speſt",
@@ -2492,6 +2496,7 @@ const OMNIPRESENT_PATTERNS = {
             "seinleg",
             "seinzug",
             "seinzüg",
+            "zeugnis",
             "äschen",
             "caſein",
             "dispen",
@@ -2543,6 +2548,7 @@ const OMNIPRESENT_PATTERNS = {
             "szwiſchen",
             "ſchloſſen",
             "wiſſenſeh",
+            "zeugniſſe",
             "äſschenſ",
             "biſschen",
             "öſſchenſ",
@@ -2975,6 +2981,7 @@ const OMNIPRESENT_PATTERNS = {
             "spavillon",
             "spackung",
             "spolygon",
+            "sunfähig",
             "sunglück",
             "hauſung",
             "konſumq",
@@ -3766,7 +3773,9 @@ const START_PATTERNS = {
         "das"
     ],
     "e": [
+        "erzeugniſſe",
         "ermeſſens",
+        "erzeugnis",
         "eiskunſt",
         "engliſch",
         "entwäſſ",
@@ -4457,6 +4466,7 @@ const START_PATTERNS = {
         "weſ"
     ],
     "z": [
+        "zeugniſſe",
         "zulaſſung",
         "zurückgeſ",
         "zahlungs",
