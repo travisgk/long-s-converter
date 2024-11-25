@@ -4,7 +4,7 @@ Description: This contains spelling patterns of the long S
              in the German language. These are used to fill in uncertainties.
 
 Author: TravisGK
-Version: 1.0.93
+Version: 1.0.32
 
 License: MIT License
 */
@@ -632,6 +632,7 @@ const FORCED_OVERWRITES = [
     "ſanierung",
     "ſmalltalk",
     "aſphaltſ",
+    "beſtätig",
     "faſhionſ",
     "filmſnob",
     "glaſteſt",
@@ -1656,7 +1657,7 @@ const OMNIPRESENT_PATTERNS = {
             "dreiflüſseſtädte",
             "dreiflüſseſtadt",
             "ſcharfſinnsteſt",
-            "veſtibularstest",
+            "veſtibularsteſt",
             "briefaustauſch",
             "seingeſchränkt",
             "bonapartismus",
